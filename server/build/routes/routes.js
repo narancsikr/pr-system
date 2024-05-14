@@ -98,7 +98,10 @@ const configureRoutes = (passport, router) => {
     router.post('/register', (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
-        const user = new user_1.User({ email: email, password: password });
+        const name = req.body.name;
+        const address = req.body.address;
+        const nickname = req.body.nickname;
+        const user = new user_1.User({ email: email, password: password, name: name, address: address, nickname: nickname });
         user.save().then(data => {
             res.status(200).send(data);
         }).catch(error => {

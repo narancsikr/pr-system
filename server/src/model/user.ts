@@ -5,11 +5,17 @@ const SALT_FACTOR = 10;
 
 interface IUser extends Document {
     email: string;
+    name?: string;
+    address?: string;
+    nickname?: string;
     password: string;
     comparePassword: (candidatePassword: string, callback: (error: Error | null, isMatch: boolean) => void) => void;
 }
 const UserSchema: Schema <IUser> = new mongoose.Schema({
     email: { type: String, required: true},
+    name: { type: String, required: false},
+    address: { type: String, required: false},
+    nickname: { type: String, required: false},
     password: { type: String, required: true}
 });
 

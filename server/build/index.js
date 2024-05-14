@@ -11,6 +11,7 @@ const express_session_1 = __importDefault(require("express-session"));
 const passport_1 = __importDefault(require("passport"));
 const passport_2 = require("./passport/passport");
 const mongoose_1 = __importDefault(require("mongoose"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = 5000;
 const dbUrl = 'mongodb://localhost:6000/my_db';
@@ -21,6 +22,18 @@ mongoose_1.default.connect(dbUrl).then(() => {
     console.log(error);
     return;
 });
+const whitelist = ['*', 'http://localhost:4200'];
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (whitelist.indexOf(origin) !== -1 || whitelist.includes('*')) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS.'));
+        }
+    }
+};
+app.use((0, cors_1.default)(corsOptions));
 //bodyParser
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 //cookieParser

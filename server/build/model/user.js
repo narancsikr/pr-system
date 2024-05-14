@@ -9,6 +9,9 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const SALT_FACTOR = 10;
 const UserSchema = new mongoose_1.default.Schema({
     email: { type: String, required: true },
+    name: { type: String, required: false },
+    address: { type: String, required: false },
+    nickname: { type: String, required: false },
     password: { type: String, required: true }
 });
 //hook
